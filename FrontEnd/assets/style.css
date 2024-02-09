@@ -234,6 +234,13 @@ li:hover {
     color: white;
     transition: 0.5s;
 }
+#filter-All:active,
+#filter-Hotels\ \&\ restaurants:active,
+#filter-Appartements:active,
+#filter-Objets:active {
+    background: #1d6154;
+    color: white;
+}
 /* Added elements ends */
 .gallery {
     width: 100%;
