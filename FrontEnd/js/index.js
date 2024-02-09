@@ -18,16 +18,16 @@ async function fetchData(url) {
 let categories;
 let works;
 
-//Fonction init qui lance toute l'application
+// Fonction init qui lance toute l'application
 async function init(){
   categories = await fetchData("http://localhost:5678/api/categories");
   works = await fetchData("http://localhost:5678/api/works");
-  console.log(categories, works)
-  displayProjects(works)
-  createFilterButtons(categories)
+  console.log(categories, works);
+  displayProjects(works);
+  createFilterButtons(categories);
 }
 
-init()
+init();
 
 // Fonction pour créer les boutons de filtre
 function createFilterButtons(categories) {
@@ -37,7 +37,6 @@ function createFilterButtons(categories) {
   // Créer le bouton "Tous"
   const allButton = document.createElement('button');
   allButton.textContent = 'Tous';
-  // allButton.id = 'filter-All';
   allButton.className = 'filter-btn';
   filtersDiv.appendChild(allButton);
 
@@ -50,13 +49,12 @@ function createFilterButtons(categories) {
   categories.forEach((category) => {
     const button = document.createElement('button');
     button.textContent = category.name;
-    // button.id = `filter-${category.name}`;
     button.className = 'filter-btn';
     filtersDiv.appendChild(button);
 
     // Attacher un gestionnaire d'événements à chaque bouton de catégorie
     button.addEventListener('click', () => {
-      filterProjectsByCategory(category.name);
+      filterProjectsByCategory(category.id);
     });
   });
 }
@@ -90,7 +88,13 @@ function createProjectFigure(project) {
 }
 
 // Fonction pour filtrer les projets par catégorie
-function filterProjectsByCategory(category) {
-  console.log(`Filtering projects by category: ${category}`);
-  console.log(works);
+function filterProjectsByCategory(categoryId) {
+  console.log(`Filtering projects by category ID: ${categoryId}`);
+  
+  // Filtrer les projets en fonction de la catégorie
+  const filteredProjects = (categoryId === 'All') ? works : works.filter(project => project.categoryId === categoryId);
+
+  // Mettre à jour l'affichage des projets
+  displayProjects(filteredProjects);
 }
+
