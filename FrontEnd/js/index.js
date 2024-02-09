@@ -1,17 +1,33 @@
 // Fonction pour effectuer une requête Fetch
-// function fetchData(url) {
-//   console.log(`Fetching data from: ${url}`);
-//   return fetch(url)
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw new Error(`HTTP Error! Status: ${response.status}`);
-//       }
-//       return response.json();
-//     })
-//     .catch((error) => {
-//       console.error("Fetch error:", error);
-//     });
-// }
+async function fetchData(url) {
+  try {
+    console.log(`Fetching data from: ${url}`);
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP Error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Fetch error:", error);
+  }
+} 
+
+let categories;
+let works;
+
+//Fonction init qui lance toute l'application
+async function init(){
+  categories = await fetchData("http://localhost:5678/api/categories");
+  works = await fetchData("http://localhost:5678/api/works");
+  console.log(categories, works)
+  displayProjects(works)
+  createFilterButtons(categories)
+}
+
+init()
 
 // Fonction pour créer les boutons de filtre
 function createFilterButtons(categories) {
@@ -21,13 +37,12 @@ function createFilterButtons(categories) {
   // Créer le bouton "Tous"
   const allButton = document.createElement('button');
   allButton.textContent = 'Tous';
-  allButton.id = 'filter-All';
+  // allButton.id = 'filter-All';
   allButton.className = 'filter-btn';
   filtersDiv.appendChild(allButton);
 
   // Attacher un gestionnaire d'événements au clic du bouton "Tous"
   allButton.addEventListener('click', () => {
-    console.log("Filtering projects by category: All");
     filterProjectsByCategory('All');
   });
 
@@ -35,13 +50,12 @@ function createFilterButtons(categories) {
   categories.forEach((category) => {
     const button = document.createElement('button');
     button.textContent = category.name;
-    button.id = `filter-${category.name}`;
+    // button.id = `filter-${category.name}`;
     button.className = 'filter-btn';
     filtersDiv.appendChild(button);
 
     // Attacher un gestionnaire d'événements à chaque bouton de catégorie
     button.addEventListener('click', () => {
-      console.log(`Filtering projects by category: ${category.name}`);
       filterProjectsByCategory(category.name);
     });
   });
@@ -77,54 +91,6 @@ function createProjectFigure(project) {
 
 // Fonction pour filtrer les projets par catégorie
 function filterProjectsByCategory(category) {
-//   let apiUrl = "http://localhost:5678/api/works";
-
-//   // Si la catégorie n'est pas "Tous", utilise une des catégories de l'URL de l'API
-//   if (category !== 'All') {
-//     apiUrl += `?category=${category}`;
-//   }
-
-//   console.log(`Fetching and filtering projects from: ${apiUrl}`);
-//   fetchData(apiUrl)
-//     .then((filteredProjects) => {
-//       displayProjects(filteredProjects);
-//     });
+  console.log(`Filtering projects by category: ${category}`);
+  console.log(works);
 }
-
-// Lancer la séquence de requêtes
-// fetchData("http://localhost:5678/api/categories")
-//   .then((categories) => {
-//     console.log("Fetched categories:", categories);
-//     // Créer les boutons de filtre et afficher tous les projets initialement
-//     createFilterButtons(categories);
-//     return fetchData("http://localhost:5678/api/works");
-//   })
-//   .then((projects) => {
-//     console.log("Fetched projects:", projects, categories);
-//     displayProjects(projects);
-//   });
-
-  async function init(){
-    const categories = await fetchData("http://localhost:5678/api/categories");
-    const works = await fetchData("http://localhost:5678/api/works");
-    console.log(categories, works)
-    displayProjects(works)
-    createFilterButtons(categories)
-  }
-  async function fetchData(url) {
-    try {
-      console.log(`Fetching data from: ${url}`);
-      const response = await fetch(url);
-  
-      if (!response.ok) {
-        throw new Error(`HTTP Error! Status: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Fetch error:", error);
-    }
-  }
-
-init()

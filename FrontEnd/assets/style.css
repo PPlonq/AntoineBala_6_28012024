@@ -211,10 +211,7 @@ li:hover {
     justify-content: center;
     margin: 50px;
 }
-#filter-All,
-#filter-Hotels\ \&\ restaurants,
-#filter-Appartements,
-#filter-Objets {
+.filter-btn {
     margin-right: 20px;
     font-family: Syne;
     font-weight: 700;
@@ -226,18 +223,12 @@ li:hover {
     border-radius: 60px;
     cursor: pointer;
 }
-#filter-All:hover,
-#filter-Hotels\ \&\ restaurants:hover,
-#filter-Appartements:hover,
-#filter-Objets:hover {
+.filter-btn:hover {
     background: #1d6154;
     color: white;
     transition: 0.5s;
 }
-#filter-All:active,
-#filter-Hotels\ \&\ restaurants:active,
-#filter-Appartements:active,
-#filter-Objets:active {
+.filter-btn:active {
     background: #1d6154;
     color: white;
 }
