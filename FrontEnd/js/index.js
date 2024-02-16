@@ -56,6 +56,7 @@ function createFilterButtons(categories) {
     button.addEventListener('click', () => {
       filterProjectsByCategory(category.id);
     });
+    
   });
 }
 
@@ -96,5 +97,21 @@ function filterProjectsByCategory(categoryId) {
 
   // Mettre à jour l'affichage des projets
   displayProjects(filteredProjects);
+
+  activeBtn();
 }
+
+    //fonction pour mettre à jour les boutons au clic
+function activeBtn() {
+  const btns = document.querySelectorAll(".filters");
+  console.log(btns)
+  // button.forEach((button, index) => { 
+  // if (index === categoryId) {
+  //   dot.classList.add("filter_selected");
+  // } else {
+  //   dot.classList.remove("filter_selected");
+  // }
+  // });
+}
+
 
