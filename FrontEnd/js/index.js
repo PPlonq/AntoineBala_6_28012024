@@ -54,9 +54,8 @@ function createFilterButtons(categories) {
 
     // Attacher un gestionnaire d'événements à chaque bouton de catégorie
     button.addEventListener('click', () => {
-      filterProjectsByCategory(category.id);
-    });
-    
+      filterProjectsByCategory(category.id);   
+    });   
   });
 }
 
@@ -98,20 +97,27 @@ function filterProjectsByCategory(categoryId) {
   // Mettre à jour l'affichage des projets
   displayProjects(filteredProjects);
 
-  activeBtn();
+  activeBtn(categoryId);
 }
 
-    //fonction pour mettre à jour les boutons au clic
-function activeBtn() {
-  const btns = document.querySelectorAll(".filters");
-  console.log(btns)
-  // button.forEach((button, index) => { 
-  // if (index === categoryId) {
-  //   dot.classList.add("filter_selected");
-  // } else {
-  //   dot.classList.remove("filter_selected");
-  // }
-  // });
+// Fonction pour mettre à jour les boutons au clic
+function activeBtn(categoryId) {
+  const btns = document.querySelectorAll(".filter-btn");
+  console.log(btns);
+
+  btns.forEach((button) => {
+    const buttonCategoryId = (button.textContent === 'Tous') ? 'All' : button.textContent;
+
+    if (buttonCategoryId === categoryId) {
+      button.classList.add("filter_selected");
+    } else {
+      button.classList.remove("filter_selected");
+    }
+  });
 }
+
+
+
+
 
 
