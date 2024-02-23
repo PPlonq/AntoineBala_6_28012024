@@ -232,6 +232,22 @@ li:hover {
     background: #1d6154;
     color: white;
 }
+
+.menuLogin {
+    color: inherit;
+    text-decoration: none;
+}
+
+#bodyLogin {
+    height: calc(100vh - 143px - 73px);
+    min-height: 420px;
+}
+
+#PasswordLink {
+    color: inherit;
+    display: flex;
+    justify-content: center;
+}
 /* Added elements ends */
 .gallery {
     width: 100%;

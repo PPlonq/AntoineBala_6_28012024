@@ -37,7 +37,8 @@ function createFilterButtons(categories) {
   // Créer le bouton "Tous"
   const allButton = document.createElement('button');
   allButton.textContent = 'Tous';
-  allButton.className = 'filter-btn';
+  allButton.className = 'filter-btn filter_selected';
+  allButton.dataset.id = 'All';
   filtersDiv.appendChild(allButton);
 
   // Attacher un gestionnaire d'événements au clic du bouton "Tous"
@@ -50,6 +51,7 @@ function createFilterButtons(categories) {
     const button = document.createElement('button');
     button.textContent = category.name;
     button.className = 'filter-btn';
+    button.dataset.id = category.id;
     filtersDiv.appendChild(button);
 
     // Attacher un gestionnaire d'événements à chaque bouton de catégorie
@@ -103,12 +105,13 @@ function filterProjectsByCategory(categoryId) {
 // Fonction pour mettre à jour les boutons au clic
 function activeBtn(categoryId) {
   const btns = document.querySelectorAll(".filter-btn");
-  console.log(btns);
+  console.log(btns, categoryId);
 
   btns.forEach((button) => {
-    const buttonCategoryId = (button.textContent === 'Tous') ? 'All' : button.textContent;
+    const buttonCategoryId = (button.textContent === 'Tous') ? 'All' : button.dataset.id;
+    console.log(button.dataset.id, buttonCategoryId == categoryId)
 
-    if (buttonCategoryId === categoryId) {
+    if (buttonCategoryId == categoryId) {
       button.classList.add("filter_selected");
     } else {
       button.classList.remove("filter_selected");
