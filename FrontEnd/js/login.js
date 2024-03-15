@@ -10,9 +10,9 @@ async function postData(url, body) {
             body: JSON.stringify(body),
         });
 
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP ! Statut : ${response.status}`);
-        }
+        // if (!response.ok) {
+        //     throw new Error(`Erreur HTTP ! Statut : ${response.status}`);
+        // }
 
         const data = await response.json();
         return data;
@@ -22,7 +22,7 @@ async function postData(url, body) {
     }
 }
 
-// Fonctionnalité pour gérer la soumission du formulaire et la redirection
+// Fonctionnalité pour gérer l'entry du formulaire et la redirection
 document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.querySelector('#login form');
 
@@ -39,11 +39,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const result = await postData(apiUrl, postDataExample);
 
             // Vérifier la réponse de l'API et rediriger si la connexion est réussie
-            if (result.success) {
+            console.log(result)
+            if (result.token) {
                 console.log('Connexion réussie. Redirection vers index.html');
+                localStorage.setItem('token', result.token)
                 window.location.href = 'index.html';
             } else {
-                console.error('Échec de la connexion. Message du serveur :', result.message);
+                console.error('Erreur dans l’identifiant ou le mot de passe', result.message);
+                alert("Erreur dans l’identifiant ou le mot de passe");
                 // Gérer l'échec de la connexion, afficher un message d'erreur, etc.
             }
         } catch (error) {

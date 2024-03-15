@@ -25,6 +25,7 @@ async function init(){
   console.log(categories, works);
   displayProjects(works);
   createFilterButtons(categories);
+  admin();
 }
 
 init();
@@ -119,7 +120,11 @@ function activeBtn(categoryId) {
   });
 }
 
-
+// gestion du localStorage
+function admin() {
+  let token = localStorage.getItem('token');
+  console.log(token);
+}
 
 
 
