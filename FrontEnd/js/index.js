@@ -120,11 +120,41 @@ function activeBtn(categoryId) {
   });
 }
 
-// gestion du localStorage
+// Gestion du localStorage
 function admin() {
   let token = localStorage.getItem('token');
   console.log(token);
+
+  if (token) {
+          // Cacher les boutons si le token est présent
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      filterButtons.forEach(button => {
+          button.style.display = 'none';
+      });
+
+      // Ajoute une barre
+      const topBar = document.createElement('div');
+      topBar.innerHTML = '<p>Mode édition</p>';
+      topBar.id = 'top-bar';
+      document.body.insertBefore(topBar, document.body.firstChild);
+
+      
+  }
 }
+    // Verification du token dans le localStorage
+    const loginLogoutBtn = document.getElementById('menu-login');
+    const token = localStorage.getItem('token');
+    if (token) {
+        // Si le token existe, change "Login" en "Logout"
+        loginLogoutBtn.textContent = 'Logout';
+        // Event listener pour se déconnecter
+        loginLogoutBtn.addEventListener('click', function() {
+            // Enlève le token du localStorage (deconnexion)
+            localStorage.removeItem('token');
+            // si besoin de redirection
+            // window.location.href = './login.html';
+        });
+    }
 
 
 

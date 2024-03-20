@@ -280,6 +280,14 @@ li:hover {
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 /* Login section ends */
+#top-bar {
+    height: 40px;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 /* Added elements ends */
 .gallery {
     width: 100%;
