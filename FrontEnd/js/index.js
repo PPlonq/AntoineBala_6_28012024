@@ -121,9 +121,11 @@ function activeBtn(categoryId) {
 }
 
 // Gestion du localStorage
+// Gestion du localStorage
 function admin() {
     let token = localStorage.getItem("token");
     const loginLogoutBtn = document.querySelector(".menuLogin");
+    const modifyProjects = document.getElementById("modify-works"); // Reference to the "Modifier" clickable text
     console.log(token);
     console.log(loginLogoutBtn);
 
@@ -147,7 +149,26 @@ function admin() {
             // Enlève le token du localStorage (deconnexion)
             localStorage.removeItem("token");
             // si besoin de redirection
-            // window.location.href = './login.html';
+            // window.location.href = "./index.html";
+        });
+        // Ajouter un écouteur d'événements pour le texte "Modifier"
+        const modifyProjects = document.getElementById("modify-works");
+        modifyProjects.addEventListener("click", function () {
+            // Afficher la modale
+            const modal = document.querySelector(".modal");
+            modal.style.display = "block";
+
+            // Afficher l'overlay pour flouter l'arrière-plan
+            const overlay = document.querySelector(".overlay");
+            overlay.style.display = "block";
+
+            // Ajouter un écouteur d'événements pour fermer la modale et l'overlay lorsqu'on clique à l'extérieur de la modale
+            overlay.addEventListener("click", function (event) {
+                if (event.target === overlay) {
+                    modal.style.display = "none";
+                    overlay.style.display = "none";
+                }
+            });
         });
     }
 }
