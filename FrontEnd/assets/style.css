@@ -288,6 +288,11 @@ li:hover {
     align-items: center;
     justify-content: center;
 }
+#top-bar > p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 /* Added elements ends */
 .gallery {
     width: 100%;
