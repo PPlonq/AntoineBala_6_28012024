@@ -38,8 +38,11 @@
                 </article>
             </section>
             <section id="portfolio">
-                <h2>Mes Projets</h2>
-                <p id="modify-works">Modifier</p>
+                <div id="projects">
+                    <h2>Mes Projets</h2>
+                    <p id="modify-works">Modifier</p>
+                </div>
+
                 <!-- added filters -->
                 <div class="filters"></div>
                 <div class="gallery">
@@ -103,10 +106,12 @@
                 </form>
             </section>
         </main>
-        <div class="modal">
-            <div class="modal-content">
-                <img src="./assets/icons/cross.png" alt="cross" />
-                <h3>Gallerie Photo</h3>
+        <div class="containerModal">
+            <div class="modal">
+                <div class="modal-content">
+                    <img id="cross" src="./assets/icons/cross.png" alt="cross" />
+                    <h3>Gallerie Photo</h3>
+                </div>
             </div>
         </div>
         <div class="overlay"></div>
@@ -117,6 +122,7 @@
                 </ul>
             </nav>
         </footer>
+        <script src="./js/admin.js"></script>
         <script src="./js/index.js"></script>
     </body>
 </html>

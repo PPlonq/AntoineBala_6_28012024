@@ -233,6 +233,15 @@ li:hover {
     color: white;
 }
 /* Login Section */
+#projects {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+#modify-works {
+    padding-left: 15px;
+}
+
 .menuLogin {
     color: inherit;
     text-decoration: none;
@@ -294,16 +303,28 @@ li:hover {
     gap: 5px;
 }
 /* Modal */
+.containerModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 .modal {
+    position: relative;
     width: 630px;
     height: 688px;
-    position: absolute;
-    top: 660px;
-    left: 30%;
     border-radius: 10px;
     background-color: #ffffff;
     z-index: 1001;
-    display: none;
 }
 .modal-content > img {
     padding: 10px 10px 0 0;
@@ -317,19 +338,6 @@ li:hover {
     align-items: center;
     justify-content: center;
     margin: 50px;
-}
-
-/* blur */
-
-.overlay {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the transparency as needed */
-    z-index: 1000; /* Ensure it's above the modal */
-    display: none; /* Hide by default */
 }
 
 /* Added elements ends */
