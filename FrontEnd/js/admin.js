@@ -57,3 +57,42 @@ function eventModal() {
         closeModal();
     });
 }
+
+async function fetchWorksFromAPI() {
+    try {
+        const response = await fetch("http://localhost:5678/api/works");
+        if (!response.ok) {
+            throw new Error(`HTTP Error! Status: ${response.status}`);
+        }
+        const works = await response.json();
+        return works;
+    } catch (error) {
+        console.error("Error fetching works:", error);
+    }
+}
+
+async function displayWorksInModal() {
+    const worksContainer = document.getElementById("works-container");
+    worksContainer.innerHTML = "";
+
+    const works = await fetchWorksFromAPI();
+    if (works) {
+        works.forEach((work) => {
+            const workElement = createWorkElement(work);
+            worksContainer.appendChild(workElement);
+        });
+    }
+}
+
+function createWorkElement(work) {
+    const workElement = document.createElement("div");
+    workElement.classList.add("work");
+    const img = document.createElement("img");
+    img.src = work.imageUrl;
+
+    workElement.appendChild(img);
+
+    return workElement;
+}
+
+displayWorksInModal();

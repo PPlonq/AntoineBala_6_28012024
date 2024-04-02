@@ -318,6 +318,26 @@ li:hover {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+#works-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(93px, 1fr));
+    gap: 10px;
+    padding: 60px;
+}
+.work {
+    /* Styles for individual work items */
+    text-align: center; /* Center-align the content */
+}
+
+.work img {
+    /* Styles for the images */
+    max-width: 100%; /* Ensure images don't exceed their container */
+}
+
+#works-container > img {
+    height: 20px;
+}
+
 .modal {
     position: relative;
     width: 630px;
@@ -337,7 +357,7 @@ li:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 50px;
+    margin: 50px 50px 0 50px;
 }
 
 /* Added elements ends */
