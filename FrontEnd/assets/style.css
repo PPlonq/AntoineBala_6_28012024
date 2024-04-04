@@ -322,22 +322,23 @@ li:hover {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(93px, 1fr));
     gap: 10px;
-    padding: 60px;
+    padding: 60px 50px 30px 50px;
 }
 .work {
-    /* Styles for individual work items */
-    text-align: center; /* Center-align the content */
+    text-align: center;
 }
 
 .work img {
-    /* Styles for the images */
-    max-width: 100%; /* Ensure images don't exceed their container */
+    max-width: 100%;
 }
 
 #works-container > img {
     height: 20px;
 }
-
+#borderLine {
+    margin: 0 50px;
+    border-bottom: 1px solid #b3b3b3;
+}
 .modal {
     position: relative;
     width: 630px;
@@ -357,7 +358,30 @@ li:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 50px 50px 0 50px;
+    margin: 35px 50px 0 50px;
+}
+
+#addPicturebtndiv {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+#addPicturebtn {
+    font-family: Syne;
+    font-weight: 700;
+    font-size: 16px;
+    border: 1px solid #1d6154;
+    background: #1d6154;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 60px;
+    cursor: pointer;
+}
+
+#addPicturebtn:hover {
+    background: #248e7a;
+    transition: 0.5s ease-in-out;
 }
 
 /* Added elements ends */

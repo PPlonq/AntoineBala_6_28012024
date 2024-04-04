@@ -89,6 +89,8 @@ function createWorkElement(work) {
     workElement.classList.add("work");
     const img = document.createElement("img");
     img.src = work.imageUrl;
+    // img.innerHTML = '<img src="./assets/icons/Trash.png" alt="Trash btn"/>';
+    // img.id = "trash-btn";
 
     workElement.appendChild(img);
 
