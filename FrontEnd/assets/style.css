@@ -240,6 +240,7 @@ li:hover {
 }
 #modify-works {
     padding-left: 15px;
+    cursor: pointer;
 }
 
 .menuLogin {
@@ -289,6 +290,7 @@ li:hover {
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 /* Login section ends */
+/* Top bar edit mode */
 #top-bar {
     position: absolute;
     top: 0;
@@ -306,6 +308,7 @@ li:hover {
     align-items: center;
     gap: 5px;
 }
+/* top bar edit mode ends */
 /* Modal */
 .containerModal {
     position: fixed;
@@ -339,6 +342,7 @@ li:hover {
 #works-container > img {
     height: 20px;
 }
+
 #borderLine {
     margin: 0 50px;
     border-bottom: 1px solid #b3b3b3;
@@ -365,6 +369,20 @@ li:hover {
     margin: 35px 50px 0 50px;
 }
 
+.image-container {
+    position: relative;
+}
+
+.trash-icon {
+    background: black;
+    padding: 5px;
+    border-radius: 2px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
 #addPicturebtndiv {
     display: flex;
     justify-content: center;
@@ -387,6 +405,7 @@ li:hover {
     background: #248e7a;
     transition: 0.5s ease-in-out;
 }
+/* Modal ends */
 
 /* Added elements ends */
 .gallery {

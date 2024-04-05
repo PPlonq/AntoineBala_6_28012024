@@ -25,6 +25,7 @@ async function init() {
     console.log(categories, works);
     displayProjects(works);
     createFilterButtons(categories);
+    displayWorksInModal(works);
     admin();
 }
 
@@ -119,3 +120,87 @@ function activeBtn(categoryId) {
         }
     });
 }
+
+let token = localStorage.getItem("token");
+
+async function deleteWork(workId) {
+    try {
+        console.log(deleteWork);
+        const response = await fetch("http://localhost:5678/api/works/" + workId, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP Error! Status: ${response.status}`);
+        }
+    } catch (error) {
+        console.error("Erreur de Fetch :", error);
+    }
+}
+
+function displayWorksInModal(works) {
+    const worksContainer = document.getElementById("works-container");
+    worksContainer.innerHTML = "";
+
+    works.forEach((work) => {
+        const workElement = createWorkElement(work);
+        worksContainer.appendChild(workElement);
+    });
+}
+
+function createWorkElement(work) {
+    const workElement = document.createElement("div");
+    workElement.classList.add("work");
+
+    const imageContainer = document.createElement("div");
+    imageContainer.classList.add("image-container");
+
+    const trashIcon = document.createElement("img");
+    trashIcon.src = "./assets/icons/trash.png";
+    trashIcon.alt = "Delete";
+    trashIcon.classList.add("trash-icon");
+
+    trashIcon.addEventListener("click", () => {
+        console.log("Deleting work...");
+        const deletedWork = deleteWork(work.id);
+    });
+
+    const img = document.createElement("img");
+    img.src = work.imageUrl;
+
+    imageContainer.appendChild(trashIcon);
+    imageContainer.appendChild(img);
+
+    workElement.appendChild(imageContainer);
+
+    return workElement;
+}
+
+const addPicturebtn = document.getElementById("addPicturebtn");
+const addWorkModal = document.getElementById("addWorkModal");
+addPicturebtn.addEventListener("click", function () {
+    addWorkModal.style.display = "block";
+});
+
+// Close the modal when the user clicks on the close button
+const closeBtn = addWorkModal.querySelector(".close");
+closeBtn.addEventListener("click", function () {
+    addWorkModal.style.display = "none";
+});
+
+// Close the modal when the user clicks outside the modal
+window.addEventListener("click", function (event) {
+    if (event.target == addWorkModal) {
+        addWorkModal.style.display = "none";
+    }
+});
+
+// Prevent modal closure when the user clicks inside the form
+const form = document.getElementById("addWorkForm");
+form.addEventListener("click", function (event) {
+    event.stopPropagation();
+});

@@ -1,6 +1,8 @@
 const modifyProjects = document.getElementById("modify-works");
 const cross = document.getElementById("cross");
 const modal = document.querySelector(".containerModal");
+// const addPicture = document.getElementById("addPicturebtn");
+// const workModal = document.getElementById("addWorkModal");
 
 // Gestion du localStorage
 function admin() {
@@ -58,43 +60,24 @@ function eventModal() {
     });
 }
 
-async function fetchWorksFromAPI() {
-    try {
-        const response = await fetch("http://localhost:5678/api/works");
-        if (!response.ok) {
-            throw new Error(`HTTP Error! Status: ${response.status}`);
-        }
-        const works = await response.json();
-        return works;
-    } catch (error) {
-        console.error("Error fetching works:", error);
-    }
-}
+// function openWorkModal() {
+//     workModal.style.display = "flex";
+// }
 
-async function displayWorksInModal() {
-    const worksContainer = document.getElementById("works-container");
-    worksContainer.innerHTML = "";
+// function closeWorkModal() {
+//     workModal.style.display = "none";
+// }
 
-    const works = await fetchWorksFromAPI();
-    if (works) {
-        works.forEach((work) => {
-            const workElement = createWorkElement(work);
-            worksContainer.appendChild(workElement);
-        });
-    }
-}
-
-function createWorkElement(work) {
-    const workElement = document.createElement("div");
-    workElement.classList.add("work");
-    const img = document.createElement("img");
-    img.src = work.imageUrl;
-    // img.innerHTML = '<img src="./assets/icons/Trash.png" alt="Trash btn"/>';
-    // img.id = "trash-btn";
-
-    workElement.appendChild(img);
-
-    return workElement;
-}
-
-displayWorksInModal();
+// function eventModal() {
+//     addPicture.addEventListener("click", function () {
+//         openWorkModal();
+//     });
+//     workModal.addEventListener("click", function (e) {
+//         if (e.target == workModal) {
+//             closeWorkModal();
+//         }
+//     });
+//     cross.addEventListener("click", function () {
+//         closeWorkModal();
+//     });
+// }
