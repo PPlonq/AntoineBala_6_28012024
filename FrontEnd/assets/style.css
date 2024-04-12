@@ -343,7 +343,7 @@ li:hover {
     height: 20px;
 }
 
-#borderLine {
+.borderLine {
     margin: 0 50px;
     border-bottom: 1px solid #b3b3b3;
 }
@@ -404,6 +404,22 @@ li:hover {
 #addPicturebtn:hover {
     background: #248e7a;
     transition: 0.5s ease-in-out;
+}
+
+#AddPicture {
+    background: cyan;
+}
+
+#addWorkForm {
+    text-align: left;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 150px;
+}
+#addWorkForm > #Categorie,
+#workTitle {
+    margin-top: 10px;
 }
 /* Modal ends */
 

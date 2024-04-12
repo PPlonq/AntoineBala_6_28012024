@@ -3,9 +3,9 @@ async function postData(url, body) {
     try {
         console.log(`Envoi de données à : ${url}`);
         const response = await fetch(url, {
-            method: 'POST',  // Utilise la méthode POST pour la requête
+            method: "POST", // Utilise la méthode POST pour la requête
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(body),
         });
@@ -23,34 +23,34 @@ async function postData(url, body) {
 }
 
 // Fonctionnalité pour gérer l'entry du formulaire et la redirection
-document.addEventListener('DOMContentLoaded', function () {
-    const loginForm = document.querySelector('#login form');
+document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.querySelector("#login form");
 
-    loginForm.addEventListener('submit', async function (event) {
+    loginForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
 
         try {
-            const apiUrl = 'http://localhost:5678/api/users/login';
+            const apiUrl = "http://localhost:5678/api/users/login";
             const postDataExample = { email, password };
 
             const result = await postData(apiUrl, postDataExample);
 
             // Vérifier la réponse de l'API et rediriger si la connexion est réussie
-            console.log(result)
+            console.log(result);
             if (result.token) {
-                console.log('Connexion réussie. Redirection vers index.html');
-                localStorage.setItem('token', result.token)
-                window.location.href = 'index.html';
+                console.log("Connexion réussie. Redirection vers index.html");
+                localStorage.setItem("token", result.token);
+                window.location.href = "index.html";
             } else {
-                console.error('Erreur dans l’identifiant ou le mot de passe', result.message);
+                console.error("Erreur dans l’identifiant ou le mot de passe", result.message);
                 alert("Erreur dans l’identifiant ou le mot de passe");
                 // Gérer l'échec de la connexion, afficher un message d'erreur, etc.
             }
         } catch (error) {
-            console.error('Échec de la connexion. Erreur :', error);
+            console.error("Échec de la connexion. Erreur :", error);
             // Gérer d'autres erreurs, afficher un message d'erreur, etc.
         }
     });

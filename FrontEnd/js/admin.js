@@ -1,5 +1,5 @@
 const modifyProjects = document.getElementById("modify-works");
-const cross = document.getElementById("cross");
+const cross = document.querySelector(".cross");
 const modal = document.querySelector(".containerModal");
 // const addPicture = document.getElementById("addPicturebtn");
 // const workModal = document.getElementById("addWorkModal");

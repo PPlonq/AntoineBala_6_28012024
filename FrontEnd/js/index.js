@@ -181,26 +181,30 @@ function createWorkElement(work) {
 }
 
 const addPicturebtn = document.getElementById("addPicturebtn");
-const addWorkModal = document.getElementById("addWorkModal");
+const addWorkModal = document.getElementById("WorkModal");
 addPicturebtn.addEventListener("click", function () {
     addWorkModal.style.display = "block";
 });
 
-// Close the modal when the user clicks on the close button
-const closeBtn = addWorkModal.querySelector(".close");
+const closeBtn = addWorkModal.querySelector(".cross");
 closeBtn.addEventListener("click", function () {
     addWorkModal.style.display = "none";
 });
 
-// Close the modal when the user clicks outside the modal
 window.addEventListener("click", function (event) {
-    if (event.target == addWorkModal) {
+    if (event.target == WorkModal) {
         addWorkModal.style.display = "none";
     }
 });
 
-// Prevent modal closure when the user clicks inside the form
 const form = document.getElementById("addWorkForm");
 form.addEventListener("click", function (event) {
     event.stopPropagation();
+    console.log(form);
 });
+
+// const form = document.getElementById("addWorkForm");
+// form.addEventListener("submit", function (event) {
+//     event.preventDefault();
+//     console.log(form);
+// });
