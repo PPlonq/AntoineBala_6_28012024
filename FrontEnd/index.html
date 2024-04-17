@@ -75,14 +75,17 @@
         <div class="containerModal" id="WorkModal">
             <div class="modal">
                 <div class="modal-content">
+                    <div></div>
                     <img class="cross" src="./assets/icons/cross.png" alt="cross" />
                     <h3>Ajouter Photo</h3>
                     <div id="AddPictureForm">
-                        <label for="AddPicture" id="AddPicture">+ Ajouter Photo</label>
-                        <input type="file" />
+                        <img src="./assets/icons/picture.png" alt="Picture icon" id="PictureIcon" />
+                        <label for="AddPicture" id="AddPictureBtn">+ Ajouter Photo</label>
+                        <input type="file" id="AddPicture" accept="image/jpeg, image/png" />
+                        <p id="Format">jpg, png : 4mo max</p>
                     </div>
                     <form id="addWorkForm">
-                        <label for="workTitle" id="workTitle">Titre du Work :</label>
+                        <label for="workTitle" id="workTitle">Titre</label>
                         <input type="text" id="workTitleInput" name="workTitle" />
                         <label for="Categorie" id="Categorie">Catégorie</label>
                         <select name="Catégorie" id="CategorieSelect">

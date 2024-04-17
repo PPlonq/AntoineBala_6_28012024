@@ -344,7 +344,7 @@ li:hover {
 }
 
 .borderLine {
-    margin: 0 50px;
+    margin: 20px 50px;
     border-bottom: 1px solid #b3b3b3;
 }
 .modal {
@@ -383,6 +383,18 @@ li:hover {
     cursor: pointer;
 }
 
+#PictureIcon {
+    width: 76px;
+    position: relative;
+    left: 8em;
+    bottom: 2em;
+}
+#Format {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
 #addPicturebtndiv {
     display: flex;
     justify-content: center;
@@ -406,8 +418,34 @@ li:hover {
     transition: 0.5s ease-in-out;
 }
 
+#WorkModal .modal {
+    position: relative;
+    width: 630px;
+    height: 688px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    z-index: 1001;
+}
+
+#AddPictureForm {
+    display: flex;
+    flex-direction: column;
+    background: #e8f1f6;
+    padding: 3em 5em;
+    margin: 30px 100px;
+}
+
 #AddPicture {
-    background: cyan;
+    display: none;
+}
+
+#AddPictureBtn {
+    background: #cbd6dc;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    padding: 14px;
+    border-radius: 20px;
 }
 
 #addWorkForm {
@@ -415,15 +453,34 @@ li:hover {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-    padding: 150px;
+    padding: 0 100px;
 }
-#addWorkForm > #Categorie,
-#workTitle {
-    margin-top: 10px;
+
+#workTitleInput,
+#CategorieSelect {
+    width: 420px;
+    height: 51px;
+}
+
+#SendPhoto {
+    font-family: Syne;
+    font-weight: 700;
+    font-size: 16px;
+    border: 1px solid #1d6154;
+    background: #1d6154;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 60px;
+    cursor: pointer;
+}
+
+#SendPhoto:hover {
+    filter: brightness(150%);
+    transition: 0.5s ease-in-out;
 }
 /* Modal ends */
 
-/* Added elements ends */
+/* Added content ends */
 .gallery {
     width: 100%;
     display: grid;

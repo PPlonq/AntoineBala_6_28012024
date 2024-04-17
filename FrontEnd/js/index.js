@@ -1,3 +1,8 @@
+const API_HOST = "http://localhost:5678";
+
+let categories;
+let works;
+
 // Fonction pour effectuer une requête Fetch
 async function fetchData(url) {
     try {
@@ -15,13 +20,29 @@ async function fetchData(url) {
     }
 }
 
-let categories;
-let works;
+async function deleteWork(workId) {
+    try {
+        console.log(`Deleting work from workId ${workId}`);
+        const response = await fetch(API_HOST + "/api/works/" + workId, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP Error! Status: ${response.status}`);
+        }
+    } catch (error) {
+        console.error("Erreur de Fetch :", error);
+    }
+}
 
 // Fonction init qui lance toute l'application
 async function init() {
-    categories = await fetchData("http://localhost:5678/api/categories");
-    works = await fetchData("http://localhost:5678/api/works");
+    categories = await fetchData(API_HOST + "/api/categories");
+    works = await fetchData(API_HOST + "/api/works");
     console.log(categories, works);
     displayProjects(works);
     createFilterButtons(categories);
@@ -123,25 +144,6 @@ function activeBtn(categoryId) {
 
 let token = localStorage.getItem("token");
 
-async function deleteWork(workId) {
-    try {
-        console.log(deleteWork);
-        const response = await fetch("http://localhost:5678/api/works/" + workId, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP Error! Status: ${response.status}`);
-        }
-    } catch (error) {
-        console.error("Erreur de Fetch :", error);
-    }
-}
-
 function displayWorksInModal(works) {
     const worksContainer = document.getElementById("works-container");
     worksContainer.innerHTML = "";
@@ -164,9 +166,9 @@ function createWorkElement(work) {
     trashIcon.alt = "Delete";
     trashIcon.classList.add("trash-icon");
 
-    trashIcon.addEventListener("click", () => {
+    trashIcon.addEventListener("click", async () => {
         console.log("Deleting work...");
-        const deletedWork = deleteWork(work.id);
+        await deleteWork(work.id);
     });
 
     const img = document.createElement("img");
@@ -183,7 +185,7 @@ function createWorkElement(work) {
 const addPicturebtn = document.getElementById("addPicturebtn");
 const addWorkModal = document.getElementById("WorkModal");
 addPicturebtn.addEventListener("click", function () {
-    addWorkModal.style.display = "block";
+    addWorkModal.style.display = "flex";
 });
 
 const closeBtn = addWorkModal.querySelector(".cross");
@@ -199,12 +201,34 @@ window.addEventListener("click", function (event) {
 
 const form = document.getElementById("addWorkForm");
 form.addEventListener("click", function (event) {
+    event.preventDefault();
+    const workTitle = document.getElementById("workTitleInput").value;
+    const categorie = document.getElementById("CategorieSelect").value;
+    const picture = document.getElementById("AddPicture");
+    const files = picture.files;
+    let output = {
+        work: workTitle,
+        category: categorie,
+    };
+    if (files.length > 0) {
+        const file = files[0]; // Suppose que vous traitez uniquement le premier fichier sélectionné
+        output["file"] = {
+            Nom_du_fichier: file.name,
+            Type_du_fichier: file.type,
+            Taille_du_fichier_en_bytes: file.size,
+        };
+    }
     event.stopPropagation();
-    console.log(form);
+    console.log(output);
 });
 
-// const form = document.getElementById("addWorkForm");
-// form.addEventListener("submit", function (event) {
-//     event.preventDefault();
-//     console.log(form);
-// });
+// const Picture = document.getElementById("").value
+
+// try {
+//     const postDataExample = { workTitle, Categorie };
+
+//     const result = await postData(postDataExample);
+// } catch (error) {
+//     console.error("Échec de la connexion. Erreur :", error);
+//     // Gérer d'autres erreurs, afficher un message d'erreur, etc.
+// }
