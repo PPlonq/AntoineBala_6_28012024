@@ -1,48 +1,10 @@
-const API_HOST = "http://localhost:5678";
-
 let categories;
 let works;
 
-// Fonction pour effectuer une requête Fetch
-async function fetchData(url) {
-    try {
-        console.log(`Fetching data from: ${url}`);
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error(`HTTP Error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error("Fetch error:", error);
-    }
-}
-
-async function deleteWork(workId) {
-    try {
-        console.log(`Deleting work from workId ${workId}`);
-        const response = await fetch(API_HOST + "/api/works/" + workId, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP Error! Status: ${response.status}`);
-        }
-    } catch (error) {
-        console.error("Erreur de Fetch :", error);
-    }
-}
-
 // Fonction init qui lance toute l'application
 async function init() {
-    categories = await fetchData(API_HOST + "/api/categories");
-    works = await fetchData(API_HOST + "/api/works");
+    categories = await fetchData("/api/categories");
+    works = await fetchData("/api/works");
     console.log(categories, works);
     displayProjects(works);
     createFilterButtons(categories);
@@ -199,12 +161,38 @@ window.addEventListener("click", function (event) {
     }
 });
 
+const picture = document.getElementById("AddPicture");
+const pictureIcon = document.getElementById("PictureIcon");
+function validateImage(pic) {
+    const valid_types = ["image/jpg", "image/png", "image/jpeg"];
+    const valid_size = 4 * 1024 * 1024;
+
+    if (valid_types.includes(pic.type) && pic.size <= valid_size) {
+        return true;
+    }
+    return false;
+}
+picture.addEventListener("change", (event) => {
+    if (picture.files && picture.files[0]) {
+        if (validateImage(picture.files[0])) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                pictureIcon.src = e.target.result;
+            };
+            reader.readAsDataURL(picture.files[0]);
+        } else {
+            pictureIcon.src = "./assets/icons/picture.png";
+            picture.value = "";
+            alert("Please enter jpg/png and of size less than or equal to 4Mb");
+        }
+    }
+});
 const form = document.getElementById("addWorkForm");
-form.addEventListener("click", function (event) {
+form.addEventListener("submit", function (event) {
     event.preventDefault();
+    event.stopPropagation();
     const workTitle = document.getElementById("workTitleInput").value;
     const categorie = document.getElementById("CategorieSelect").value;
-    const picture = document.getElementById("AddPicture");
     const files = picture.files;
     let output = {
         work: workTitle,
@@ -217,18 +205,12 @@ form.addEventListener("click", function (event) {
             Type_du_fichier: file.type,
             Taille_du_fichier_en_bytes: file.size,
         };
+        const formData = new FormData();
+        formData.append("title", workTitle);
+        formData.append("category", categorie);
+        formData.append("image", file);
+        console.log(formData);
+        addWork(formData);
     }
-    event.stopPropagation();
     console.log(output);
 });
-
-// const Picture = document.getElementById("").value
-
-// try {
-//     const postDataExample = { workTitle, Categorie };
-
-//     const result = await postData(postDataExample);
-// } catch (error) {
-//     console.error("Échec de la connexion. Erreur :", error);
-//     // Gérer d'autres erreurs, afficher un message d'erreur, etc.
-// }
