@@ -41,7 +41,6 @@ async function addWork(data) {
             method: "POST", // specify the HTTP method
             headers: {
                 Authorization: `Bearer ${token}`,
-                "Content-Type": "multipart/form-data", // specify the content type
             },
             body: data,
         };

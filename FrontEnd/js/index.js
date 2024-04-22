@@ -7,12 +7,18 @@ async function init() {
     works = await fetchData("/api/works");
     console.log(categories, works);
     displayProjects(works);
+    createCategoriesOptions(categories);
     createFilterButtons(categories);
     displayWorksInModal(works);
     admin();
 }
 
 init();
+
+const categorieSelect = document.getElementById("CategorieSelect");
+function createCategoriesOptions(categories) {
+    categories.forEach((category) => categorieSelect.add(new Option(category.name, category.id)));
+}
 
 // Fonction pour créer les boutons de filtre
 function createFilterButtons(categories) {
@@ -40,7 +46,8 @@ function createFilterButtons(categories) {
         filtersDiv.appendChild(button);
 
         // Attacher un gestionnaire d'événements à chaque bouton de catégorie
-        button.addEventListener("click", () => {
+        button.addEventListener("click", (event) => {
+            event.preventDefault();
             filterProjectsByCategory(category.id);
         });
     });
@@ -173,6 +180,7 @@ function validateImage(pic) {
     return false;
 }
 picture.addEventListener("change", (event) => {
+    event.preventDefault();
     if (picture.files && picture.files[0]) {
         if (validateImage(picture.files[0])) {
             let reader = new FileReader();
