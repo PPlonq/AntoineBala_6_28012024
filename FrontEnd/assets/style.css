@@ -233,6 +233,10 @@ li:hover {
     color: white;
 }
 /* Login Section */
+#mainPage {
+    cursor: pointer;
+}
+
 #projects {
     display: flex;
     justify-content: center;
@@ -241,6 +245,11 @@ li:hover {
 #modify-works {
     padding-left: 15px;
     cursor: pointer;
+    display: none;
+}
+#modify-works,
+i {
+    gap: 3px;
 }
 
 .menuLogin {

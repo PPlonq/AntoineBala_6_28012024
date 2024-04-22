@@ -19,6 +19,9 @@ function admin() {
             button.style.display = "none";
         });
 
+        let modifyWorks = document.getElementById("modify-works");
+        modifyWorks.style.display = "flex";
+
         // Ajoute une barre
         const topBar = document.createElement("div");
         topBar.innerHTML = '<p><img src="./assets/icons/vector.png" alt="Mode Edition"/>Mode édition</p>';
@@ -31,8 +34,6 @@ function admin() {
         loginLogoutBtn.addEventListener("click", function () {
             // Enlève le token du localStorage (deconnexion)
             localStorage.removeItem("token");
-            // si besoin de redirection
-            // window.location.href = "./index.html";
         });
         eventModal();
     }

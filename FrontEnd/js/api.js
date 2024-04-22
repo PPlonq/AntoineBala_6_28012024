@@ -38,7 +38,7 @@ async function addWork(data) {
     try {
         console.log(`adding work`);
         const options = {
-            method: "POST", // specify the HTTP method
+            method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
             },

@@ -55,3 +55,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+let home = document.getElementById("mainPage");
+
+home.addEventListener("click", function () {
+    window.location.href = "./index.html";
+});
