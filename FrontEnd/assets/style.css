@@ -339,6 +339,8 @@ i {
     grid-template-columns: repeat(auto-fit, minmax(93px, 1fr));
     gap: 10px;
     padding: 60px 50px 30px 50px;
+    height: 350px; /* Set a fixed height for the container */
+    overflow: scroll;
 }
 .work {
     text-align: center;
@@ -393,10 +395,11 @@ i {
 }
 
 #PictureIcon {
-    width: 76px;
-    position: relative;
-    left: 8em;
+    /* width: 76px;*/
+    /* position: relative; */
+    /* left: 8em; */
     bottom: 2em;
+    height: inherit;
 }
 #Format {
     display: flex;
@@ -417,6 +420,7 @@ i {
     border: 1px solid #1d6154;
     background: #1d6154;
     color: white;
+    margin-top: 30px;
     padding: 10px 20px;
     border-radius: 60px;
     cursor: pointer;
@@ -438,10 +442,12 @@ i {
 
 #AddPictureForm {
     display: flex;
+    align-items: center;
     flex-direction: column;
     background: #e8f1f6;
-    padding: 3em 5em;
+    /* padding: 3em 5em; */
     margin: 30px 100px;
+    height: 260px;
 }
 
 #AddPicture {

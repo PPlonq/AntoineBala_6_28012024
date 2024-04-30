@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (result.token) {
                 console.log("Connexion réussie. Redirection vers index.html");
                 localStorage.setItem("token", result.token);
-                window.location.href = "index.html";
+                window.location.href = "./index.html";
             } else {
                 console.error("Erreur dans l’identifiant ou le mot de passe", result.message);
                 alert("Erreur dans l’identifiant ou le mot de passe");

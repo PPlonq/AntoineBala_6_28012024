@@ -3,17 +3,23 @@ let works;
 
 // Fonction init qui lance toute l'application
 async function init() {
+    console.log("Initializing");
     categories = await fetchData("/api/categories");
-    works = await fetchData("/api/works");
-    console.log(categories, works);
-    displayProjects(works);
+    initializeWorks();
+    console.log(categories);
     createCategoriesOptions(categories);
     createFilterButtons(categories);
-    displayWorksInModal(works);
     admin();
 }
 
 init();
+
+async function initializeWorks() {
+    works = await fetchData("/api/works");
+    console.log(works);
+    displayProjects(works);
+    displayWorksInModal(works);
+}
 
 const categorieSelect = document.getElementById("CategorieSelect");
 function createCategoriesOptions(categories) {
@@ -46,8 +52,7 @@ function createFilterButtons(categories) {
         filtersDiv.appendChild(button);
 
         // Attacher un gestionnaire d'événements à chaque bouton de catégorie
-        button.addEventListener("click", (event) => {
-            event.preventDefault();
+        button.addEventListener("click", () => {
             filterProjectsByCategory(category.id);
         });
     });
@@ -138,6 +143,7 @@ function createWorkElement(work) {
     trashIcon.addEventListener("click", async () => {
         console.log("Deleting work...");
         await deleteWork(work.id);
+        await initializeWorks();
     });
 
     const img = document.createElement("img");
@@ -152,24 +158,32 @@ function createWorkElement(work) {
 }
 
 const addPicturebtn = document.getElementById("addPicturebtn");
-const addWorkModal = document.getElementById("WorkModal");
+const workModal = document.getElementById("WorkModal");
+const galleryModal = document.getElementById("GalleryModal");
 addPicturebtn.addEventListener("click", function () {
-    addWorkModal.style.display = "flex";
+    workModal.style.display = "flex";
 });
 
-const closeBtn = addWorkModal.querySelector(".cross");
-closeBtn.addEventListener("click", function () {
-    addWorkModal.style.display = "none";
-});
+const closeBtnGallery = document.getElementById("closeGallery");
+const closeBtnAddPhoto = document.getElementById("closeAddPhoto");
 
-window.addEventListener("click", function (event) {
-    if (event.target == WorkModal) {
-        addWorkModal.style.display = "none";
-    }
+closeBtnGallery.addEventListener("click", function () {
+    closeGalleryModal();
+});
+closeBtnAddPhoto.addEventListener("click", function () {
+    clearForm();
 });
 
 const picture = document.getElementById("AddPicture");
 const pictureIcon = document.getElementById("PictureIcon");
+const addPictureBtn = document.getElementById("AddPictureBtn");
+const formatInfo = document.getElementById("Format");
+
+function hidePictureUploadElements() {
+    addPictureBtn.style.display = "none";
+    formatInfo.style.display = "none";
+}
+
 function validateImage(pic) {
     const valid_types = ["image/jpg", "image/png", "image/jpeg"];
     const valid_size = 4 * 1024 * 1024;
@@ -179,8 +193,7 @@ function validateImage(pic) {
     }
     return false;
 }
-picture.addEventListener("change", (event) => {
-    event.preventDefault();
+picture.addEventListener("change", () => {
     if (picture.files && picture.files[0]) {
         if (validateImage(picture.files[0])) {
             let reader = new FileReader();
@@ -188,17 +201,19 @@ picture.addEventListener("change", (event) => {
                 pictureIcon.src = e.target.result;
             };
             reader.readAsDataURL(picture.files[0]);
+            hidePictureUploadElements();
         } else {
-            pictureIcon.src = "./assets/icons/picture.png";
-            picture.value = "";
+            resetAddPicture();
             alert("Please enter jpg/png and of size less than or equal to 4Mb");
         }
     }
 });
+
 const form = document.getElementById("addWorkForm");
-form.addEventListener("submit", function (event) {
+
+form.addEventListener("submit", async function (event) {
     event.preventDefault();
-    event.stopPropagation();
+    //event.stopPropagation();
     const workTitle = document.getElementById("workTitleInput").value;
     const categorie = document.getElementById("CategorieSelect").value;
     const files = picture.files;
@@ -218,7 +233,29 @@ form.addEventListener("submit", function (event) {
         formData.append("category", categorie);
         formData.append("image", file);
         console.log(formData);
-        addWork(formData);
+        await addWork(formData);
+        await initializeWorks();
     }
+    clearForm();
     console.log(output);
 });
+
+function closeWorkModal() {
+    workModal.style.display = "none";
+}
+
+function closeGalleryModal() {
+    galleryModal.style.display = "none";
+}
+
+function clearForm() {
+    closeWorkModal();
+    resetAddPicture();
+}
+
+function resetAddPicture() {
+    pictureIcon.src = "./assets/icons/picture.png";
+    picture.value = "";
+    addPictureBtn.style.display = "block";
+    formatInfo.style.display = "block";
+}

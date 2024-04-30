@@ -60,25 +60,3 @@ function eventModal() {
         closeModal();
     });
 }
-
-// function openWorkModal() {
-//     workModal.style.display = "flex";
-// }
-
-// function closeWorkModal() {
-//     workModal.style.display = "none";
-// }
-
-// function eventModal() {
-//     addPicture.addEventListener("click", function () {
-//         openWorkModal();
-//     });
-//     workModal.addEventListener("click", function (e) {
-//         if (e.target == workModal) {
-//             closeWorkModal();
-//         }
-//     });
-//     cross.addEventListener("click", function () {
-//         closeWorkModal();
-//     });
-// }
