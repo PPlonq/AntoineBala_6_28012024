@@ -341,6 +341,7 @@ i {
     padding: 60px 50px 30px 50px;
     height: 350px; /* Set a fixed height for the container */
     overflow: scroll;
+    margin-top: 2em;
 }
 .work {
     text-align: center;
@@ -354,8 +355,12 @@ i {
     height: 20px;
 }
 
-.borderLine {
-    margin: 20px 50px;
+#borderLineFirst {
+    margin: 20px 50px 0;
+    border-bottom: 1px solid #b3b3b3;
+}
+#borderLineSecond {
+    margin: 25px 0;
     border-bottom: 1px solid #b3b3b3;
 }
 .modal {
@@ -394,12 +399,31 @@ i {
     cursor: pointer;
 }
 
-#PictureIcon {
-    /* width: 76px;*/
+#backModal {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 15px;
+    cursor: pointer;
+}
+
+#closeGallery,
+#closeAddPhoto {
+    position: absolute;
+    top: 14px;
+    right: 20px;
+    cursor: pointer;
+}
+#pictureImg {
+    width: auto;
+}
+
+#pictureIcon {
+    width: 76px;
     /* position: relative; */
     /* left: 8em; */
     bottom: 2em;
-    height: inherit;
+    /* height: inherit; */
 }
 #Format {
     display: flex;
@@ -410,7 +434,6 @@ i {
 #addPicturebtndiv {
     display: flex;
     justify-content: center;
-    margin: 20px;
 }
 
 #addPicturebtn {
@@ -492,6 +515,15 @@ i {
 #SendPhoto:hover {
     filter: brightness(150%);
     transition: 0.5s ease-in-out;
+}
+
+#SendPhoto:disabled:hover {
+    filter: none;
+}
+
+#SendPhoto:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 /* Modal ends */
 

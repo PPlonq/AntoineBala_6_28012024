@@ -72,7 +72,7 @@
                     <img class="cross" src="./assets/icons/cross.png" alt="cross" id="closeGallery" />
                     <h3>Gallerie Photo</h3>
                     <div id="works-container"></div>
-                    <div class="borderLine"></div>
+                    <div id="borderLineFirst"></div>
                     <div id="addPicturebtndiv">
                         <button id="addPicturebtn">Ajouter une photo</button>
                     </div>
@@ -84,9 +84,10 @@
                 <div class="modal-content">
                     <div></div>
                     <img class="cross" src="./assets/icons/cross.png" alt="cross" id="closeAddPhoto" />
+                    <img class="cross" src="./assets/icons/arrow-left.png" alt="cross" id="backModal" />
                     <h3>Ajouter Photo</h3>
                     <div id="AddPictureForm">
-                        <img src="./assets/icons/picture.png" alt="Picture icon" id="PictureIcon" />
+                        <img src="./assets/icons/picture.png" alt="Picture icon" id="pictureIcon" />
                         <label for="AddPicture" id="AddPictureBtn">+ Ajouter Photo</label>
                         <input type="file" id="AddPicture" accept="image/jpeg, image/png" />
                         <p id="Format">jpg, png : 4mo max</p>
@@ -96,8 +97,8 @@
                         <input type="text" id="workTitleInput" name="workTitle" />
                         <label for="Categorie" id="Categorie">Catégorie</label>
                         <select name="Catégorie" id="CategorieSelect"></select>
-                        <div class="borderLine"></div>
-                        <button type="submit" id="SendPhoto">Ajouter</button>
+                        <div id="borderLineSecond"></div>
+                        <button type="submit" id="SendPhoto" disabled>Ajouter</button>
                     </form>
                 </div>
             </div>

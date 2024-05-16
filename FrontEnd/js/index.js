@@ -175,7 +175,7 @@ closeBtnAddPhoto.addEventListener("click", function () {
 });
 
 const picture = document.getElementById("AddPicture");
-const pictureIcon = document.getElementById("PictureIcon");
+const pictureIcon = document.getElementById("pictureIcon");
 const addPictureBtn = document.getElementById("AddPictureBtn");
 const formatInfo = document.getElementById("Format");
 
@@ -193,6 +193,17 @@ function validateImage(pic) {
     }
     return false;
 }
+
+let pictureImg = document.getElementById("pictureImg");
+function changePictureIcon() {
+    pictureIcon.classList.remove("pictureIcon");
+    pictureIcon.classList.add("pictureImg");
+}
+
+function resetPictureIcon() {
+    pictureIcon.classList.remove("pictureImg");
+    pictureIcon.classList.add("pictureIcon");
+}
 picture.addEventListener("change", () => {
     if (picture.files && picture.files[0]) {
         if (validateImage(picture.files[0])) {
@@ -201,9 +212,13 @@ picture.addEventListener("change", () => {
                 pictureIcon.src = e.target.result;
             };
             reader.readAsDataURL(picture.files[0]);
+            changePictureIcon();
             hidePictureUploadElements();
+            console.log("Class list after change:", pictureIcon.classList);
         } else {
             resetAddPicture();
+            resetPictureIcon();
+            console.log("Class list after change:", pictureIcon.classList);
             alert("Please enter jpg/png and of size less than or equal to 4Mb");
         }
     }
@@ -259,3 +274,45 @@ function resetAddPicture() {
     addPictureBtn.style.display = "block";
     formatInfo.style.display = "block";
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Select relevant elements
+    const pictureInput = document.getElementById("AddPicture");
+    const workTitleInput = document.getElementById("workTitleInput");
+    const categorieSelect = document.getElementById("CategorieSelect");
+    const sendPhotoButton = document.getElementById("SendPhoto");
+
+    // Add event listeners to trigger sendPhotoBtn() when inputs change
+    pictureInput.addEventListener("change", function () {
+        console.log("Picture input changed");
+        sendPhotoBtn();
+    });
+    workTitleInput.addEventListener("input", function () {
+        console.log("Work title input changed");
+        sendPhotoBtn();
+    });
+    categorieSelect.addEventListener("change", function () {
+        console.log("Category select changed");
+        sendPhotoBtn();
+    });
+
+    // Define sendPhotoBtn function
+    function sendPhotoBtn() {
+        const files = pictureInput.files;
+        const workTitle = workTitleInput.value;
+        const categorie = categorieSelect.value;
+
+        console.log("Work Title:", workTitle);
+        console.log("Category:", categorie);
+        console.log("Number of files selected:", files.length);
+
+        // Enable the button only when all conditions are met
+        if (workTitle && categorie && files.length > 0) {
+            sendPhotoButton.disabled = false;
+        } else {
+            sendPhotoButton.disabled = true;
+        }
+
+        console.log("Button disabled:", sendPhotoButton.disabled);
+    }
+});
